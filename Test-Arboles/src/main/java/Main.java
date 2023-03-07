@@ -12,26 +12,36 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
-    public Nodo selectedNode;
+    public Nodo productsSelectedNode;
+    public Nodo clientsSelectedNode;
     public Arbol productos;
+    public Arbol clientes;
     public Main() {
         
+        
         initComponents();
+        
         productos = new Arbol();
-        Nodo root = new Nodo("root");
-        selectedNode = root;
-        productos.setRoot(root);
-        jLabel2.setText(root.getData());
+        Nodo productsRoot = new Nodo("root");
+        productsSelectedNode = productsRoot;
+        productos.setRoot(productsRoot);
         
-        root.addChild("Clothes");
-        root.addChild("Electronics");
-        root.addChild("Food");
+        clientes = new Arbol();
+        Nodo clientsRoot = new Nodo("root");
+        clientsSelectedNode = clientsRoot;
+        clientes.setRoot(clientsRoot);
         
-        root.hijos.get(0).addChild("Shirts");
-        root.hijos.get(0).addChild("Pants");
-        root.hijos.get(0).addChild("Shoes");
+        productsLabel.setText(productsRoot.getData());
         
-        setChildrenToList(root, jList1, jLabel2);
+        productsRoot.addChild("Clothes");
+        productsRoot.addChild("Electronics");
+        productsRoot.addChild("Food");
+        
+        productsRoot.hijos.get(0).addChild("Shirts");
+        productsRoot.hijos.get(0).addChild("Pants");
+        productsRoot.hijos.get(0).addChild("Shoes");
+        
+        setChildrenToList(productsRoot, jList1, productsLabel);
         
     }
 
@@ -47,12 +57,10 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        insertProducts = new javax.swing.JDialog();
-        insertProductsTitle = new javax.swing.JLabel();
-        insertProductsNameLabel = new javax.swing.JLabel();
-        insertProductsTextField1 = new javax.swing.JTextField();
-        insertProductsLabel2 = new javax.swing.JLabel();
-        insertProductsTextField2 = new javax.swing.JTextField();
+        createCategory = new javax.swing.JDialog();
+        createCategoryTitle = new javax.swing.JLabel();
+        createCategoryNameLabel = new javax.swing.JLabel();
+        createCategoryTextField1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         insertProductsIdLabel = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
@@ -65,18 +73,24 @@ public class Main extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        productsLabel = new javax.swing.JLabel();
         errLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         clients_tab = new javax.swing.JPanel();
 
-        insertProductsTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        insertProductsTitle.setText("New Category ");
+        createCategory.setResizable(false);
 
-        insertProductsNameLabel.setText("Name");
+        createCategoryTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        createCategoryTitle.setText("New Category ");
 
-        insertProductsLabel2.setText("Description");
+        createCategoryNameLabel.setText("Name");
+
+        createCategoryTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createCategoryTextField1ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("ID:");
 
@@ -88,53 +102,47 @@ public class Main extends javax.swing.JFrame {
 
         insertProductsChildLabel.setText("jLabel9");
 
-        javax.swing.GroupLayout insertProductsLayout = new javax.swing.GroupLayout(insertProducts.getContentPane());
-        insertProducts.getContentPane().setLayout(insertProductsLayout);
-        insertProductsLayout.setHorizontalGroup(
-            insertProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(insertProductsLayout.createSequentialGroup()
+        javax.swing.GroupLayout createCategoryLayout = new javax.swing.GroupLayout(createCategory.getContentPane());
+        createCategory.getContentPane().setLayout(createCategoryLayout);
+        createCategoryLayout.setHorizontalGroup(
+            createCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createCategoryLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(insertProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(insertProductsLayout.createSequentialGroup()
+                .addGroup(createCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(createCategoryLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(insertProductsChildLabel))
-                    .addGroup(insertProductsLayout.createSequentialGroup()
+                    .addGroup(createCategoryLayout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(insertProductsIdLabel))
-                    .addComponent(insertProductsLabel2)
-                    .addComponent(insertProductsNameLabel)
-                    .addComponent(insertProductsTitle)
-                    .addComponent(insertProductsTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(insertProductsTextField2)
+                    .addComponent(createCategoryNameLabel)
+                    .addComponent(createCategoryTitle)
+                    .addComponent(createCategoryTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
-        insertProductsLayout.setVerticalGroup(
-            insertProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(insertProductsLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(insertProductsTitle)
+        createCategoryLayout.setVerticalGroup(
+            createCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createCategoryLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(insertProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(createCategoryTitle)
+                .addGap(18, 18, 18)
+                .addGroup(createCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(insertProductsIdLabel))
                 .addGap(18, 18, 18)
-                .addComponent(insertProductsNameLabel)
+                .addComponent(createCategoryNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(insertProductsTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(insertProductsLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(insertProductsTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(insertProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(createCategoryTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(createCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(insertProductsChildLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -170,9 +178,14 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1.setText("Viewing:");
 
-        jLabel2.setText("jLabel2");
+        productsLabel.setText("jLabel2");
 
         jButton1.setText("Create New Category as Child");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -199,7 +212,7 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(products_tabLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2))
+                                .addComponent(productsLabel))
                             .addGroup(products_tabLayout.createSequentialGroup()
                                 .addComponent(jButton3)
                                 .addGap(0, 0, 0)
@@ -220,7 +233,7 @@ public class Main extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                            .addComponent(productsLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -299,15 +312,15 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(selectedNode.getChild(jList1.getSelectedIndex()).hijos.isEmpty())
+        if(productsSelectedNode.getChild(jList1.getSelectedIndex()).hijos.isEmpty())
         {
             errLabel.setText("Node has no children");
         }
         else
         {
             errLabel.setText("");
-            selectedNode = selectedNode.getChild(jList1.getSelectedIndex());
-            setChildrenToList(selectedNode , jList1, jLabel2);
+            productsSelectedNode = productsSelectedNode.getChild(jList1.getSelectedIndex());
+            setChildrenToList(productsSelectedNode , jList1, productsLabel);
         }
         
         
@@ -317,9 +330,22 @@ public class Main extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         errLabel.setText("");
-        selectedNode = productos.getRoot();
-        setChildrenToList(selectedNode , jList1, jLabel2);
+        productsSelectedNode = productos.getRoot();
+        setChildrenToList(productsSelectedNode , jList1, productsLabel);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void createCategoryTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCategoryTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_createCategoryTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        createCategory.setVisible(true);
+        createCategory.setSize(240, 265);
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -358,27 +384,25 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel clients_tab;
+    private javax.swing.JDialog createCategory;
+    private javax.swing.JLabel createCategoryNameLabel;
+    private javax.swing.JTextField createCategoryTextField1;
+    private javax.swing.JLabel createCategoryTitle;
     private javax.swing.JLabel errLabel;
-    private javax.swing.JDialog insertProducts;
     private javax.swing.JLabel insertProductsChildLabel;
     private javax.swing.JLabel insertProductsIdLabel;
-    private javax.swing.JLabel insertProductsLabel2;
-    private javax.swing.JLabel insertProductsNameLabel;
-    private javax.swing.JTextField insertProductsTextField1;
-    private javax.swing.JTextField insertProductsTextField2;
-    private javax.swing.JLabel insertProductsTitle;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel productsLabel;
     private javax.swing.JPanel products_tab;
     // End of variables declaration//GEN-END:variables
 }
