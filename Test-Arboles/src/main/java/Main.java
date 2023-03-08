@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -16,38 +17,38 @@ public class Main extends javax.swing.JFrame {
     public Nodo clientsSelectedNode;
     public Arbol productos;
     public Arbol clientes;
+    public ArrayList<Integer> usedProductIds;
+    public ArrayList<Integer> usedClientIds;
+    
     public Main() {
         
         
         initComponents();
         
         productos = new Arbol();
-        Nodo productsRoot = new Nodo("root");
+        Nodo productsRoot = new Nodo("root", 00);
         productsSelectedNode = productsRoot;
         productos.setRoot(productsRoot);
         
         clientes = new Arbol();
-        Nodo clientsRoot = new Nodo("root");
+        Nodo clientsRoot = new Nodo("root", 00);
         clientsSelectedNode = clientsRoot;
         clientes.setRoot(clientsRoot);
         
-        productsLabel.setText(productsRoot.getData());
+        productsLabel.setText(productsRoot.getName());
         
-        productsRoot.addChild("Clothes");
-        productsRoot.addChild("Electronics");
-        productsRoot.addChild("Food");
         
-        productsRoot.hijos.get(0).addChild("Shirts");
-        productsRoot.hijos.get(0).addChild("Pants");
-        productsRoot.hijos.get(0).addChild("Shoes");
+        usedProductIds = new ArrayList<>();
+        usedClientIds = new ArrayList<>();
+        
+        jLabel3.setText("00");
+        usedProductIds.add(00);
+        usedClientIds.add(00);
         
         setChildrenToList(productsRoot, jList1, productsLabel);
         
     }
 
-    
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,7 +58,7 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        createCategory = new javax.swing.JDialog();
+        createProductCategory = new javax.swing.JDialog();
         createCategoryTitle = new javax.swing.JLabel();
         createCategoryNameLabel = new javax.swing.JLabel();
         createCategoryTextField1 = new javax.swing.JTextField();
@@ -66,6 +67,15 @@ public class Main extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         insertProductsChildLabel = new javax.swing.JLabel();
+        createClientCategory = new javax.swing.JDialog();
+        createCategoryTitle1 = new javax.swing.JLabel();
+        createCategoryNameLabel1 = new javax.swing.JLabel();
+        createCategoryTextField2 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        insertProductsIdLabel1 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        insertProductsChildLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         products_tab = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -77,9 +87,22 @@ public class Main extends javax.swing.JFrame {
         errLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         clients_tab = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        productsLabel1 = new javax.swing.JLabel();
+        errLabel1 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
-        createCategory.setResizable(false);
+        createProductCategory.setResizable(false);
 
         createCategoryTitle.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         createCategoryTitle.setText("New Category ");
@@ -97,23 +120,28 @@ public class Main extends javax.swing.JFrame {
         insertProductsIdLabel.setText("jLabel7");
 
         jButton4.setText("Add");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Category will be child of:");
 
         insertProductsChildLabel.setText("jLabel9");
 
-        javax.swing.GroupLayout createCategoryLayout = new javax.swing.GroupLayout(createCategory.getContentPane());
-        createCategory.getContentPane().setLayout(createCategoryLayout);
-        createCategoryLayout.setHorizontalGroup(
-            createCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createCategoryLayout.createSequentialGroup()
+        javax.swing.GroupLayout createProductCategoryLayout = new javax.swing.GroupLayout(createProductCategory.getContentPane());
+        createProductCategory.getContentPane().setLayout(createProductCategoryLayout);
+        createProductCategoryLayout.setHorizontalGroup(
+            createProductCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createProductCategoryLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(createCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(createCategoryLayout.createSequentialGroup()
+                .addGroup(createProductCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(createProductCategoryLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(insertProductsChildLabel))
-                    .addGroup(createCategoryLayout.createSequentialGroup()
+                    .addGroup(createProductCategoryLayout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(insertProductsIdLabel))
@@ -123,13 +151,13 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
-        createCategoryLayout.setVerticalGroup(
-            createCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createCategoryLayout.createSequentialGroup()
+        createProductCategoryLayout.setVerticalGroup(
+            createProductCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createProductCategoryLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(createCategoryTitle)
                 .addGap(18, 18, 18)
-                .addGroup(createCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(createProductCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(insertProductsIdLabel))
                 .addGap(18, 18, 18)
@@ -137,11 +165,82 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(createCategoryTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(createCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(createProductCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(insertProductsChildLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+
+        createClientCategory.setResizable(false);
+
+        createCategoryTitle1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        createCategoryTitle1.setText("New Category ");
+
+        createCategoryNameLabel1.setText("Name");
+
+        createCategoryTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createCategoryTextField2ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("ID:");
+
+        insertProductsIdLabel1.setText("jLabel7");
+
+        jButton8.setText("Add");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Category will be child of:");
+
+        insertProductsChildLabel1.setText("jLabel9");
+
+        javax.swing.GroupLayout createClientCategoryLayout = new javax.swing.GroupLayout(createClientCategory.getContentPane());
+        createClientCategory.getContentPane().setLayout(createClientCategoryLayout);
+        createClientCategoryLayout.setHorizontalGroup(
+            createClientCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createClientCategoryLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(createClientCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(createClientCategoryLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(insertProductsChildLabel1))
+                    .addGroup(createClientCategoryLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(insertProductsIdLabel1))
+                    .addComponent(createCategoryNameLabel1)
+                    .addComponent(createCategoryTitle1)
+                    .addComponent(createCategoryTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        createClientCategoryLayout.setVerticalGroup(
+            createClientCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createClientCategoryLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(createCategoryTitle1)
+                .addGap(18, 18, 18)
+                .addGroup(createClientCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(insertProductsIdLabel1))
+                .addGap(18, 18, 18)
+                .addComponent(createCategoryNameLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(createCategoryTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(createClientCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(insertProductsChildLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
@@ -187,15 +286,27 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("ID:");
+
+        jLabel3.setText("jLabel3");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(0, 320, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout products_tabLayout = new javax.swing.GroupLayout(products_tab);
@@ -220,7 +331,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         products_tabLayout.setVerticalGroup(
             products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,15 +361,110 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Products", products_tab);
 
+        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jList2.setToolTipText("Mucho Texto");
+        jScrollPane2.setViewportView(jList2);
+
+        jButton5.setText("Next");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Go To Root");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Viewing:");
+
+        productsLabel1.setText("jLabel2");
+
+        jButton7.setText("Create New Category as Child");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("ID:");
+
+        jLabel7.setText("jLabel7");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addGap(0, 320, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout clients_tabLayout = new javax.swing.GroupLayout(clients_tab);
         clients_tab.setLayout(clients_tabLayout);
         clients_tabLayout.setHorizontalGroup(
             clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 548, Short.MAX_VALUE)
+            .addGroup(clients_tabLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton7)
+                    .addGroup(clients_tabLayout.createSequentialGroup()
+                        .addGroup(clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(clients_tabLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(productsLabel1))
+                            .addGroup(clients_tabLayout.createSequentialGroup()
+                                .addComponent(jButton6)
+                                .addGap(0, 0, 0)
+                                .addComponent(errLabel1))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         clients_tabLayout.setVerticalGroup(
             clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 367, Short.MAX_VALUE)
+            .addGroup(clients_tabLayout.createSequentialGroup()
+                .addGroup(clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(clients_tabLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(errLabel1))
+                    .addGroup(clients_tabLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(productsLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5))
+                    .addGroup(clients_tabLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton7)
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Clients", clients_tab);
@@ -287,12 +493,19 @@ public class Main extends javax.swing.JFrame {
     
     private void setChildrenToList(Nodo node, JList list, JLabel label)
     {
-        label.setText(node.getData());
+        label.setText(node.getName());
         DefaultListModel model = new DefaultListModel();
         for(int i = 0; i != node.hijos.size(); i++)
         {
-            model.add(i, node.hijos.get(i).getData());
+            model.add(i, node.hijos.get(i).getName());
         }
+        list.setModel(model);
+    }
+    
+    private void clearList(JList list)
+    {
+        DefaultListModel model = new DefaultListModel();
+        model.clear();
         list.setModel(model);
     }
     
@@ -318,8 +531,10 @@ public class Main extends javax.swing.JFrame {
         }
         else
         {
+            
             errLabel.setText("");
             productsSelectedNode = productsSelectedNode.getChild(jList1.getSelectedIndex());
+            jLabel3.setText(productsSelectedNode.getId()+"");
             setChildrenToList(productsSelectedNode , jList1, productsLabel);
         }
         
@@ -331,6 +546,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         errLabel.setText("");
         productsSelectedNode = productos.getRoot();
+        jLabel3.setText(productsSelectedNode.getId()+"");
         setChildrenToList(productsSelectedNode , jList1, productsLabel);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -340,12 +556,110 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        createCategory.setVisible(true);
-        createCategory.setSize(240, 265);
+        createProductCategory.setVisible(true);
+        createProductCategory.setSize(240, 265);
+        createCategoryTextField1.setText("");
         
+        if(jList1.isSelectionEmpty())
+        {
+            insertProductsChildLabel.setText(productsSelectedNode.getName());
+        }
+        else
+        {
+            insertProductsChildLabel.setText(productsSelectedNode.hijos.get(jList1.getSelectedIndex()).getName());
+        }
         
+        insertProductsIdLabel.setText(Integer.toString(usedProductIds.get(usedProductIds.size()-1)+1));
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        createProductCategory.setVisible(false);
+        if(!createCategoryTextField1.getText().equals(""))
+        {
+            if(jList1.isSelectionEmpty())
+            {
+                productsSelectedNode.addChild(createCategoryTextField1.getText(), Integer.parseInt(insertProductsIdLabel.getText()));
+            }
+            else
+            {
+                productsSelectedNode.hijos.get(jList1.getSelectedIndex()).addChild(createCategoryTextField1.getText(), Integer.parseInt(insertProductsIdLabel.getText()));
+            }
+            usedProductIds.add(Integer.parseInt(insertProductsIdLabel.getText()));
+            
+            
+        }
+        setChildrenToList(productsSelectedNode , jList1, productsLabel);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        if(clientsSelectedNode.getChild(jList2.getSelectedIndex()).hijos.isEmpty())
+        {
+            errLabel1.setText("Node has no children");
+        }
+        else
+        {
+            
+            errLabel1.setText("");
+            clientsSelectedNode = clientsSelectedNode.getChild(jList2.getSelectedIndex());
+            jLabel7.setText(clientsSelectedNode.getId()+"");
+            setChildrenToList(clientsSelectedNode , jList2, productsLabel1);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        errLabel1.setText("");
+        clientsSelectedNode = clientes.getRoot();
+        jLabel7.setText(clientsSelectedNode.getId()+"");
+        setChildrenToList(clientsSelectedNode , jList2, productsLabel1);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        createClientCategory.setVisible(true);
+        createClientCategory.setSize(240, 265);
+        if(!createCategoryTextField2.getText().equals(""))
+        {
+            if(jList2.isSelectionEmpty())
+            {
+                clientsSelectedNode.addChild(createCategoryTextField2.getText(), Integer.parseInt(insertProductsIdLabel1.getText()));
+            }
+            else
+            {
+                clientsSelectedNode.hijos.get(jList2.getSelectedIndex()).addChild(createCategoryTextField2.getText(), Integer.parseInt(insertProductsIdLabel1.getText()));
+            }
+            usedClientIds.add(Integer.parseInt(insertProductsIdLabel1.getText()));
+            
+            
+        }
+        setChildrenToList(clientsSelectedNode , jList2, productsLabel1);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void createCategoryTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCategoryTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_createCategoryTextField2ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        createClientCategory.setVisible(false);
+        if(!createCategoryTextField2.getText().equals(""))
+        {
+            if(jList2.isSelectionEmpty())
+            {
+                clientsSelectedNode.addChild(createCategoryTextField2.getText(), Integer.parseInt(insertProductsIdLabel1.getText()));
+            }
+            else
+            {
+                clientsSelectedNode.hijos.get(jList2.getSelectedIndex()).addChild(createCategoryTextField2.getText(), Integer.parseInt(insertProductsIdLabel1.getText()));
+            }
+            usedClientIds.add(Integer.parseInt(insertProductsIdLabel1.getText()));
+            
+            
+        }
+        setChildrenToList(clientsSelectedNode , jList2, productsLabel1);
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -384,25 +698,47 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel clients_tab;
-    private javax.swing.JDialog createCategory;
     private javax.swing.JLabel createCategoryNameLabel;
+    private javax.swing.JLabel createCategoryNameLabel1;
     private javax.swing.JTextField createCategoryTextField1;
+    private javax.swing.JTextField createCategoryTextField2;
     private javax.swing.JLabel createCategoryTitle;
+    private javax.swing.JLabel createCategoryTitle1;
+    private javax.swing.JDialog createClientCategory;
+    private javax.swing.JDialog createProductCategory;
     private javax.swing.JLabel errLabel;
+    private javax.swing.JLabel errLabel1;
     private javax.swing.JLabel insertProductsChildLabel;
+    private javax.swing.JLabel insertProductsChildLabel1;
     private javax.swing.JLabel insertProductsIdLabel;
+    private javax.swing.JLabel insertProductsIdLabel1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel productsLabel;
+    private javax.swing.JLabel productsLabel1;
     private javax.swing.JPanel products_tab;
     // End of variables declaration//GEN-END:variables
 }

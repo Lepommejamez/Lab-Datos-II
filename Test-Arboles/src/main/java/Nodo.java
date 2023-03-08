@@ -1,17 +1,26 @@
 import java.util.ArrayList;
 
-public class Nodo {
-    private String nombre;
+public class Nodo 
+{
+    private int id;
+    private String name;
     ArrayList<Nodo> hijos = new ArrayList<>();
+    ArrayList<Nodo> datos = new ArrayList<>();
     
-    public Nodo(String data){
-        this.nombre = data;
+    //Constructor
+    public Nodo(String data, int id){
+        this.name = data;
+        this.id = id;
     }
 
-    public String getData(){
-        return nombre;
+    public String getName(){
+        return name;
     }
 
+    public int getId(){
+        return id;
+    }
+    
     public Nodo getChild(int i)
     {
         try
@@ -34,11 +43,10 @@ public class Nodo {
         hijos.add(nodo);
     }
     
-    public void addChild(String text)
+    public void addChild(String text, int id)
     {
-        Nodo node = new Nodo(text);
+        Nodo node = new Nodo(text, id);
         addChild(node);
     }
 }
-
 
