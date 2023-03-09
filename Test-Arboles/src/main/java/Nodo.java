@@ -1,3 +1,4 @@
+import com.mycompany.test.arboles.objeto;
 import java.util.ArrayList;
 
 public class Nodo 
@@ -5,7 +6,7 @@ public class Nodo
     private int id;
     private String name;
     ArrayList<Nodo> hijos = new ArrayList<>();
-    ArrayList<Nodo> datos = new ArrayList<>();
+    ArrayList<objeto> datos = new ArrayList<>();
     
     //Constructor
     public Nodo(String data, int id){
