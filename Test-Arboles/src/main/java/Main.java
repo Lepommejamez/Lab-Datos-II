@@ -990,10 +990,10 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -1257,7 +1257,7 @@ public class Main extends javax.swing.JFrame {
 
         addProduct.setVisible(true);
         addProduct.setSize(300, 600);
-        if(jList1.isSelectionEmpty())
+        if(jList1.isSelectionEmpty() && productsSelectedNode != productos.getRoot())
         {
             jLabel21.setText(productsSelectedNode.getName());
         }
@@ -1265,6 +1265,10 @@ public class Main extends javax.swing.JFrame {
         {
             jLabel21.setText(productsSelectedNode.getChild(jList1.getSelectedIndex()).getName());
         }
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextArea1.setText("");
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
