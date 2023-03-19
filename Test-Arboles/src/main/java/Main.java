@@ -1,6 +1,9 @@
 
 import com.mycompany.test.arboles.objeto;
 import com.mycompany.test.arboles.producto;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,12 +11,14 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 
 /**
  *
  * @author lepom
  */
-public class Main extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame 
+{
 
     /**
      * Creates new form Main
@@ -138,6 +143,8 @@ public class Main extends javax.swing.JFrame {
         jList3 = new javax.swing.JList<>();
         jLabel22 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
+        canvas1 = new javax.swing.JPanel();
+        jButton5 = new javax.swing.JButton();
         clients_tab = new javax.swing.JPanel();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
@@ -662,6 +669,24 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout canvas1Layout = new javax.swing.GroupLayout(canvas1);
+        canvas1.setLayout(canvas1Layout);
+        canvas1Layout.setHorizontalGroup(
+            canvas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 349, Short.MAX_VALUE)
+        );
+        canvas1Layout.setVerticalGroup(
+            canvas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 276, Short.MAX_VALUE)
+        );
+
+        jButton5.setText("Draw!");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout products_tabLayout = new javax.swing.GroupLayout(products_tab);
         products_tab.setLayout(products_tabLayout);
         products_tabLayout.setHorizontalGroup(
@@ -693,38 +718,53 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)))))
                     .addComponent(jButton1)
                     .addComponent(errLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(404, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addGroup(products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5)
+                    .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         products_tabLayout.setVerticalGroup(
             products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(products_tabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(products_tabLayout.createSequentialGroup()
-                        .addGroup(products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(productsLabel)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(products_tabLayout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(errLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                    .addGroup(products_tabLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(products_tabLayout.createSequentialGroup()
+                                .addGroup(products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(productsLabel)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(products_tabLayout.createSequentialGroup()
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jButton11)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, products_tabLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(products_tabLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addComponent(errLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49))
+                    .addGroup(products_tabLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton5)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Products", products_tab);
@@ -999,6 +1039,7 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     public void preOrderTraversal(Nodo root) 
     {
         if (root == null || root.getName().equals("root")) return;
@@ -1012,6 +1053,66 @@ public class Main extends javax.swing.JFrame {
             preOrderTraversal(child);
         }
     }
+    
+    private void drawTree(Graphics g, Nodo node, int x, int y, int dx, int dy, int width, int height) 
+{
+    if (node == null) 
+    {
+        return;
+    }
+
+    // draw node
+    g.setColor(Color.black);
+    g.fillOval(x - width / 2, y - height / 2, width, height);
+    g.setColor(Color.white);
+    String str = node.getName();
+    if(str.length() > 4)
+    {
+        str = node.getName().substring(0,4);
+    }
+    g.drawString(str, x - width / 4, y + height / 4);
+
+    // draw lines to children
+    ArrayList<Nodo> children = node.getChildren();
+    int numChildren = children.size();
+    int startX = x - (numChildren - 1) * dx / 2;
+    int endX = x + (numChildren - 1) * dx / 2;
+
+    g.setColor(Color.black);
+    for (int i = 0; i < numChildren; i++) 
+    {
+        int childX = startX + i * dx;
+        int childY = y + dy;
+
+        // Check if there is another child node at the same position
+        for (int j = 0; j < i; j++) 
+        {
+            int otherChildX = startX + j * dx;
+            if (Math.abs(childX - otherChildX) < dx) 
+            {
+                // If there is, adjust the position of the current child node
+                if (childX < otherChildX) 
+                {
+                    childX -= dx / 2;
+                } else 
+                {
+                    childX += dx / 2;
+                }
+            }
+        }
+        
+        g.drawLine(x, y, childX, childY);
+        
+        drawTree(g, children.get(i), childX, childY, dx, dy, width, height);
+    }
+}
+
+    
+    public void clearPanel(JPanel panel) {
+    Graphics g = panel.getGraphics();
+    g.setColor(panel.getBackground());
+    g.fillRect(0, 0, panel.getWidth(), panel.getHeight());
+}
     
     public Boolean existeDato(Nodo root, int index, String query) 
     {
@@ -1389,6 +1490,13 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton19ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        Graphics g = canvas1.getGraphics();
+        clearPanel(canvas1);
+        
+        drawTree(g, productos.getRoot(), canvas1.getWidth()/2, 15, 50, 40, 40,30);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1428,6 +1536,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JDialog addClient;
     private javax.swing.JDialog addProduct;
     private javax.swing.JPanel buscar_tab;
+    private javax.swing.JPanel canvas1;
     private javax.swing.JLabel clientsLabel;
     private javax.swing.JPanel clients_tab;
     private javax.swing.JLabel createCategoryNameLabel;
@@ -1459,6 +1568,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;

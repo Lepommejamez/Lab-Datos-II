@@ -5,7 +5,7 @@ public class Nodo
 {
     private int id;
     private String name;
-    ArrayList<Nodo> hijos = new ArrayList<>();
+    ArrayList<Nodo> hijos = new ArrayList<Nodo>();
     ArrayList<objeto> datos = new ArrayList<>();
     
     //Constructor
