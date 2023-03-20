@@ -56,6 +56,10 @@ public class Main extends javax.swing.JFrame
         
         setChildrenToList(productsRoot, jList1, productsLabel);
         setChildrenToList(clientsRoot, jList5, clientsLabel);
+        
+        Graphics g1 = canvas1.getGraphics();
+        clearPanel(canvas1);
+        drawTree(g1, productos.getRoot(), canvas1.getWidth()/2, 15, 50, 40, 40,30);
     }
 
     /**
@@ -161,6 +165,8 @@ public class Main extends javax.swing.JFrame
         jLabel33 = new javax.swing.JLabel();
         clientsLabel = new javax.swing.JLabel();
         errLabel2 = new javax.swing.JLabel();
+        canvas2 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
         buscar_tab = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
@@ -680,7 +686,7 @@ public class Main extends javax.swing.JFrame
             .addGap(0, 276, Short.MAX_VALUE)
         );
 
-        jButton5.setText("Draw!");
+        jButton5.setText("Redraw");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -720,8 +726,8 @@ public class Main extends javax.swing.JFrame
                     .addComponent(errLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(products_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5)
-                    .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         products_tabLayout.setVerticalGroup(
@@ -762,7 +768,7 @@ public class Main extends javax.swing.JFrame
                         .addComponent(errLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49))
                     .addGroup(products_tabLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton5)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -837,6 +843,24 @@ public class Main extends javax.swing.JFrame
 
         clientsLabel.setText("jLabel2");
 
+        javax.swing.GroupLayout canvas2Layout = new javax.swing.GroupLayout(canvas2);
+        canvas2.setLayout(canvas2Layout);
+        canvas2Layout.setHorizontalGroup(
+            canvas2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 349, Short.MAX_VALUE)
+        );
+        canvas2Layout.setVerticalGroup(
+            canvas2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 276, Short.MAX_VALUE)
+        );
+
+        jButton6.setText("Redraw");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout clients_tabLayout = new javax.swing.GroupLayout(clients_tab);
         clients_tab.setLayout(clients_tabLayout);
         clients_tabLayout.setHorizontalGroup(
@@ -868,38 +892,50 @@ public class Main extends javax.swing.JFrame
                                     .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)))))
                     .addComponent(jButton14)
                     .addComponent(errLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(404, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         clients_tabLayout.setVerticalGroup(
             clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(clients_tabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(clients_tabLayout.createSequentialGroup()
-                        .addGroup(clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel33)
-                            .addComponent(clientsLabel)
-                            .addComponent(jLabel31)
-                            .addComponent(jLabel30))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(clients_tabLayout.createSequentialGroup()
-                        .addComponent(jLabel32)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton17)
-                    .addComponent(jButton15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton14)
-                    .addComponent(jButton16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(errLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                    .addGroup(clients_tabLayout.createSequentialGroup()
+                        .addGroup(clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(clients_tabLayout.createSequentialGroup()
+                                .addGroup(clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel33)
+                                    .addComponent(clientsLabel)
+                                    .addComponent(jLabel31)
+                                    .addComponent(jLabel30))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(clients_tabLayout.createSequentialGroup()
+                                .addComponent(jLabel32)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton17)
+                            .addComponent(jButton15))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(clients_tabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton14)
+                            .addComponent(jButton16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addComponent(errLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49))
+                    .addGroup(clients_tabLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton6)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Clients", clients_tab);
@@ -1224,6 +1260,9 @@ public class Main extends javax.swing.JFrame
             
         }
         setChildrenToList(productsSelectedNode , jList1, productsLabel);
+        Graphics g = canvas1.getGraphics();
+        clearPanel(canvas1);
+        drawTree(g, productos.getRoot(), canvas1.getWidth()/2, 15, 50, 40, 40,30);
         //(productsSelectedNode, jList3);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -1245,6 +1284,9 @@ public class Main extends javax.swing.JFrame
             }
             usedClientIds.add(Integer.parseInt(insertProductsIdLabel1.getText()));
             setChildrenToList(clientsSelectedNode , jList5, clientsLabel);
+            Graphics g = canvas2.getGraphics();
+            clearPanel(canvas2);
+            drawTree(g, clientes.getRoot(), canvas2.getWidth()/2, 15, 50, 40, 40,30);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1491,11 +1533,18 @@ public class Main extends javax.swing.JFrame
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
         Graphics g = canvas1.getGraphics();
         clearPanel(canvas1);
-        
         drawTree(g, productos.getRoot(), canvas1.getWidth()/2, 15, 50, 40, 40,30);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        Graphics g = canvas2.getGraphics();
+        clearPanel(canvas2);
+        drawTree(g, clientes.getRoot(), canvas2.getWidth()/2, 15, 50, 40, 40,30);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1537,6 +1586,7 @@ public class Main extends javax.swing.JFrame
     private javax.swing.JDialog addProduct;
     private javax.swing.JPanel buscar_tab;
     private javax.swing.JPanel canvas1;
+    private javax.swing.JPanel canvas2;
     private javax.swing.JLabel clientsLabel;
     private javax.swing.JPanel clients_tab;
     private javax.swing.JLabel createCategoryNameLabel;
@@ -1569,6 +1619,7 @@ public class Main extends javax.swing.JFrame
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
