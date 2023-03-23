@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class objeto 
 {
-    public List data;
+    public ArrayList<String> data;
 
     public objeto(String id_prod, String id_cat, String name) {
         data = new ArrayList();
@@ -21,4 +21,3 @@ public class objeto
     }
     
 }
-
