@@ -152,7 +152,6 @@ public class Main extends javax.swing.JFrame
         jCheckBox6 = new javax.swing.JCheckBox();
         jCheckBox7 = new javax.swing.JCheckBox();
         jTextField15 = new javax.swing.JTextField();
-        query = new javax.swing.JDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         products_tab = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -754,17 +753,6 @@ public class Main extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton19)
                 .addContainerGap(31, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout queryLayout = new javax.swing.GroupLayout(query.getContentPane());
-        query.getContentPane().setLayout(queryLayout);
-        queryLayout.setHorizontalGroup(
-            queryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 847, Short.MAX_VALUE)
-        );
-        queryLayout.setVerticalGroup(
-            queryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 457, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1504,40 +1492,64 @@ public class Main extends javax.swing.JFrame
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         if(jComboBox1.getSelectedIndex() == 0 && !jTextField1.getText().equals(""))
-        {//buscar en productos
+        {
+            //buscar en productos
+            int index = 0;
             switch(jComboBox2.getSelectedIndex())
             {
                 case 0:
-                    //Buscar por ID
-                    if(existeDato(productos.getRoot(),0,jTextField1.getText()))
-                    {
-                        jLabel24.setText("Data found at:");
-                        jLabel23.setText(rutaDato(productos.getRoot(),0,jTextField1.getText()));
-                    }
-                    else
-                    {
-                        jLabel24.setText("");
-                        jLabel23.setText("No Data Found");
-                    }
+                    //Buscar por ID - Inice 0
+                    index = 0;
                     break;
                 case 1:
-                    //Buscar por Nombre
-                    if(existeDato(productos.getRoot(),2,jTextField1.getText()))
-                    {
-                        jLabel24.setText("Data found at:");
-                        jLabel23.setText(rutaDato(productos.getRoot(),2,jTextField1.getText()));
-                    }
-                    else
-                    {
-                        jLabel24.setText("");
-                        jLabel23.setText("No Data Found");
-                    }
+                    //Buscar por Nombre - Indice 2
+                    index = 2;
                     break;   
+            }
+            if(existeDato(productos.getRoot(),0,jTextField1.getText()))
+            {
+                jLabel24.setText("Data found at:");
+                jLabel23.setText(rutaDato(productos.getRoot(),0,jTextField1.getText()));
+            }
+            else
+            {
+                jLabel24.setText("");
+                jLabel23.setText("No Data Found");
             }
         }
         else
-        {//buscar en clientes
-            
+        {
+            //buscar en clientes
+            int index = 0;
+            switch(jComboBox2.getSelectedIndex())
+            {
+                case 0:
+                    //Buscar por ID - Inice 0
+                    index = 0;
+                    break;
+                case 1:
+                    //Buscar por Nombre - Indice 2
+                    index = 2;
+                    break;
+                case 2:
+                    //Buscar por Apellido - Inice 3
+                    index = 3;
+                    break;
+                case 3:
+                    //Buscar por Celular - Inice 9
+                    index = 9;
+                    break;
+            }
+            if(existeDato(clientes.getRoot(),index,jTextField1.getText()))
+            {
+                jLabel24.setText("Data found at:");
+                jLabel23.setText(rutaDato(clientes.getRoot(),index,jTextField1.getText()));
+            }
+            else
+            {
+                jLabel24.setText("");
+                jLabel23.setText("No Data Found");
+            }
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -1637,6 +1649,9 @@ public class Main extends javax.swing.JFrame
         productsSelectedNode = productos.getRoot();
         jLabel3.setText(productsSelectedNode.getId()+"");
         setChildrenToList(productsSelectedNode , jList1, productsLabel);
+        Graphics g = canvas1.getGraphics();
+        clearPanel(canvas1);
+        drawTree(g, productos.getRoot(),productsSelectedNode, canvas1.getWidth()/2, 15, 50, 40, 40,30);
         //(productsSelectedNode, jList3);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -1656,8 +1671,11 @@ public class Main extends javax.swing.JFrame
                 setChildrenToList(productsSelectedNode , jList1, productsLabel);
                 clearList(jList3);
                 //setDataToList(productsSelectedNode, jList3);
-            } 
-        }     
+            }
+            Graphics g = canvas1.getGraphics();
+            clearPanel(canvas1);
+            drawTree(g, productos.getRoot(),productsSelectedNode, canvas1.getWidth()/2, 15, 50, 40, 40,30);
+        }  
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
@@ -1747,6 +1765,9 @@ public class Main extends javax.swing.JFrame
                 clearList(jList4);
                 //setDataToList(productsSelectedNode, jList3);
             }
+            Graphics g = canvas2.getGraphics();
+            clearPanel(canvas2);
+            drawTree(g, clientes.getRoot(),clientsSelectedNode, canvas2.getWidth()/2, 15, 50, 40, 40,30);
         }
     }//GEN-LAST:event_jButton17ActionPerformed
 
@@ -1756,6 +1777,9 @@ public class Main extends javax.swing.JFrame
         clientsSelectedNode = clientes.getRoot();
         jLabel30.setText(clientsSelectedNode.getId()+"");
         setChildrenToList(clientsSelectedNode , jList5, clientsLabel);
+        Graphics g = canvas2.getGraphics();
+        clearPanel(canvas2);
+        drawTree(g, clientes.getRoot(),clientsSelectedNode, canvas2.getWidth()/2, 15, 50, 40, 40,30);
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1967,6 +1991,5 @@ public class Main extends javax.swing.JFrame
     private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel productsLabel;
     private javax.swing.JPanel products_tab;
-    private javax.swing.JDialog query;
     // End of variables declaration//GEN-END:variables
 }
