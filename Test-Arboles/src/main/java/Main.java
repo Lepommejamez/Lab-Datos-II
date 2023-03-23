@@ -59,7 +59,7 @@ public class Main extends javax.swing.JFrame
         
         Graphics g1 = canvas1.getGraphics();
         clearPanel(canvas1);
-        drawTree(g1, productos.getRoot(), canvas1.getWidth()/2, 15, 50, 40, 40,30);
+        drawTree(g1, productos.getRoot(), productos.getRoot(), canvas1.getWidth()/2, 15, 50, 40, 40,30);
     }
 
     /**
@@ -1090,65 +1090,73 @@ public class Main extends javax.swing.JFrame
         }
     }
     
-    private void drawTree(Graphics g, Nodo node, int x, int y, int dx, int dy, int width, int height) 
-{
-    if (node == null) 
+    private void drawTree(Graphics g, Nodo node, Nodo selected, int x, int y, int dx, int dy, int width, int height) 
     {
-        return;
-    }
-
-    // draw node
-    g.setColor(Color.black);
-    g.fillOval(x - width / 2, y - height / 2, width, height);
-    g.setColor(Color.white);
-    String str = node.getName();
-    if(str.length() > 4)
-    {
-        str = node.getName().substring(0,4);
-    }
-    g.drawString(str, x - width / 4, y + height / 4);
-
-    // draw lines to children
-    ArrayList<Nodo> children = node.getChildren();
-    int numChildren = children.size();
-    int startX = x - (numChildren - 1) * dx / 2;
-    int endX = x + (numChildren - 1) * dx / 2;
-
-    g.setColor(Color.black);
-    for (int i = 0; i < numChildren; i++) 
-    {
-        int childX = startX + i * dx;
-        int childY = y + dy;
-
-        // Check if there is another child node at the same position
-        for (int j = 0; j < i; j++) 
+        if (node == null) 
         {
-            int otherChildX = startX + j * dx;
-            if (Math.abs(childX - otherChildX) < dx) 
-            {
-                // If there is, adjust the position of the current child node
-                if (childX < otherChildX) 
-                {
-                    childX -= dx / 2;
-                } else 
-                {
-                    childX += dx / 2;
-                }
-            }
+            return;
         }
         
-        g.drawLine(x, y, childX, childY);
+        // draw node
+        if(node == selected)
+        {
+            g.setColor(Color.CYAN);
+        }
+        else
+        {
+            g.setColor(Color.black);
+        }
         
-        drawTree(g, children.get(i), childX, childY, dx, dy, width, height);
-    }
-}
+        g.fillOval(x - width / 2, y - height / 2, width, height);
+        g.setColor(Color.white);
+        String str = node.getName();
+        if(str.length() > 4)
+        {
+            str = node.getName().substring(0,4);
+        }
+        g.drawString(str, x - width / 4, y + height / 4);
+        
+        // draw lines to children
+        ArrayList<Nodo> children = node.getChildren();
+        int numChildren = children.size();
+        int startX = x - (numChildren - 1) * dx / 2;
+        int endX = x + (numChildren - 1) * dx / 2;
 
-    
-    public void clearPanel(JPanel panel) {
-    Graphics g = panel.getGraphics();
-    g.setColor(panel.getBackground());
-    g.fillRect(0, 0, panel.getWidth(), panel.getHeight());
-}
+        g.setColor(Color.black);
+        for (int i = 0; i < numChildren; i++) 
+        {
+            int childX = startX + i * dx;
+            int childY = y + dy;
+            
+            // Check if there is another child node at the same position
+            for (int j = 0; j < i; j++) 
+            {
+                int otherChildX = startX + j * dx;
+                if (Math.abs(childX - otherChildX) < dx) 
+                {
+                    // If there is, adjust the position of the current child node
+                    if (childX < otherChildX) 
+                    {
+                        childX -= dx / 2;
+                    } else 
+                    {
+                        childX += dx / 2;
+                    }
+                }
+            }
+            
+            g.drawLine(x, y, childX, childY);
+            
+            drawTree(g, children.get(i), selected, childX, childY, dx, dy, width, height);
+        }
+    }
+
+    public void clearPanel(JPanel panel)
+    {
+        Graphics g = panel.getGraphics();
+        g.setColor(panel.getBackground());
+        g.fillRect(0, 0, panel.getWidth(), panel.getHeight());
+    }
     
     public Boolean existeDato(Nodo root, int index, String query) 
     {
@@ -1255,14 +1263,12 @@ public class Main extends javax.swing.JFrame
             {
                 productsSelectedNode.hijos.get(jList1.getSelectedIndex()).addChild(createCategoryTextField1.getText(), Integer.parseInt(insertProductsIdLabel.getText()));
             }
-            usedProductIds.add(Integer.parseInt(insertProductsIdLabel.getText()));
-            
-            
+            usedProductIds.add(Integer.parseInt(insertProductsIdLabel.getText()));   
         }
         setChildrenToList(productsSelectedNode , jList1, productsLabel);
         Graphics g = canvas1.getGraphics();
         clearPanel(canvas1);
-        drawTree(g, productos.getRoot(), canvas1.getWidth()/2, 15, 50, 40, 40,30);
+        drawTree(g, productos.getRoot(),productsSelectedNode, canvas1.getWidth()/2, 15, 50, 40, 40,30);
         //(productsSelectedNode, jList3);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -1286,7 +1292,7 @@ public class Main extends javax.swing.JFrame
             setChildrenToList(clientsSelectedNode , jList5, clientsLabel);
             Graphics g = canvas2.getGraphics();
             clearPanel(canvas2);
-            drawTree(g, clientes.getRoot(), canvas2.getWidth()/2, 15, 50, 40, 40,30);
+            drawTree(g, clientes.getRoot(),clientsSelectedNode, canvas2.getWidth()/2, 15, 50, 40, 40,30);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1536,19 +1542,16 @@ public class Main extends javax.swing.JFrame
         // TODO add your handling code here:
         Graphics g = canvas1.getGraphics();
         clearPanel(canvas1);
-        drawTree(g, productos.getRoot(), canvas1.getWidth()/2, 15, 50, 40, 40,30);
+        drawTree(g, productos.getRoot(),productsSelectedNode, canvas1.getWidth()/2, 15, 50, 40, 40,30);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         Graphics g = canvas2.getGraphics();
         clearPanel(canvas2);
-        drawTree(g, clientes.getRoot(), canvas2.getWidth()/2, 15, 50, 40, 40,30);
+        drawTree(g, clientes.getRoot(),clientsSelectedNode, canvas2.getWidth()/2, 15, 50, 40, 40,30);
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1580,7 +1583,6 @@ public class Main extends javax.swing.JFrame
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog addClient;
     private javax.swing.JDialog addProduct;
